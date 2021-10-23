@@ -1,38 +1,145 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  --clr-base-h: 247;
+  --clr-base-s: 40%;
+  --clr-base-l: 16%;
+
+  --clr-text: hsl(var(--clr-base-h), var(--clr-base-s), 95%);
+
+  background-color: hsl(
+    var(--clr-base-h),
+    var(--clr-base-s),
+    var(--clr-base-l)
+  );
+  color: var(--clr-text);
+}
+
 .App {
-  text-align: center;
+  margin-top: 4rem;
+  display: grid;
+  justify-items: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+.form {
+  display: grid;
+  width: 50vw;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.form input {
+  width: 100%;
+  outline: none;
+  border: none;
+  border-radius: 0.2rem;
+  background-color: var(--clr-text);
+  box-shadow: none;
+  padding: 0.7rem 0.5rem;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.form__field {
+  position: relative;
+}
+
+.form__field:focus-within .form__suggestions {
+  display: block;
+}
+
+.form__field--search:placeholder-shown + .form__suggestions {
+  display: none;
+}
+
+.form__field--search {
+  background-image: url(./search.svg);
+  background-repeat: no-repeat;
+  background-position: left 0.5rem center;
+  background-size: 1.2rem;
+
+  padding: 0.7rem 0.5rem 0.7rem 2rem !important;
+}
+
+.form__suggestions {
+  background-color: var(--clr-text);
+  color: hsl(var(--clr-base-h), var(--clr-base-s), var(--clr-base-l));
+  position: absolute;
+  width: 100%;
+  top: calc(100% + 0.2rem);
+  border-radius: 0.2rem;
+  display: none;
+  overflow: hidden;
+
+  z-index: 2;
+  box-shadow: 0 0 5px hsl(var(--clr-base-h), var(--clr-base-s), 15%);
+}
+
+.form__suggestions ul {
+  list-style: none;
+}
+
+.form__suggestions button:is(:hover, :focus) {
+  background-color: hsl(var(--clr-base-h), var(--clr-base-s), 85%);
+  outline: none;
+}
+
+.form__suggestions button {
+  width: 100%;
+  height: 100%;
+  outline: none;
+  border: none;
+  background-color: transparent;
+  padding: 0.8rem;
+  display: flex;
+  align-items: center;
+}
+
+.form__suggestions img,
+.form__selected img {
+  width: 1.5rem;
+  margin-right: 1rem;
+}
+
+.form__selected {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  padding: 0.7rem;
+  background-color: var(--clr-text);
+  color: hsl(var(--clr-base-h), var(--clr-base-s), 15%);
+  border-radius: 0.2rem;
+  inset: 0;
+
+  display: flex;
+  align-items: center;
+  /* justify-content: sp; */
+}
+
+.form__selected button {
+  margin-left: auto;
+  padding: 0.2rem;
+  font-family: monospace;
+}
+
+@media screen and (max-width: 1200px) {
+  .form {
+    width: 70vw;
   }
-  to {
-    transform: rotate(360deg);
+}
+
+@media screen and (max-width: 768px) {
+  .form {
+    width: 90vw;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .form {
+    width: 95vw;
+    grid-template-columns: 1fr;
   }
 }
